@@ -104,7 +104,7 @@ INCLUDE macros.inc
     DEC CH
     JNZ REPETE2
 
-    ; POP CX
+    POP CX
     POPALL
   RET
 IMPRIME_MATRIZ ENDP
@@ -157,6 +157,8 @@ IMPRIME_MATRIZ ENDP
     CLS
 
     CALL INICIALIZACAO    ;Iniciação do jogo
+
+    CLS
 
     CMP AL, 0         ;Condição para entrar no modo multiplayer
     JZ ESCOPO_ZERO    ;Condição 
