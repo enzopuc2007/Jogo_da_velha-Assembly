@@ -43,6 +43,7 @@ SAI1:
     CMP DL,3
     JE VIT_JOG2_COMP
 
+    ADD BX,3
     DEC CL
     JNZ DENOVO1
 
@@ -64,7 +65,7 @@ CONT2:
     JNE SAI2
     INC DL
 SAI2:
-    INC SI
+    ADD BX,3
     DEC CH
     JNZ AGAIN2
 
@@ -73,5 +74,8 @@ SAI2:
     CMP DL,3
     JE VIT_JOG2_COMP
 
+    INC SI
     DEC CL
     JNZ DENOVO2
+
+    
