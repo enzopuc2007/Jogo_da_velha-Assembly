@@ -5,7 +5,8 @@ MATRIZ DB 'x','o','x'
        DB 'x','o','x'
        DB 'X',38h,'o'
 
-MSG_
+MSG_VIT DB 'O jogador 1 é o vencedor$'
+MSG_VIT_JOG2_COMP DB 'O jogador 2 é o vencedor$'
 .CODE 
  MAIN PROC 
     MOV AX,@DATA
@@ -104,7 +105,7 @@ SAI3:
     JE VIT_JOG2_COMP
 
     XOR BX,BX
-    MOV SI,3
+    MOV SI,2
     MOV CX,3
 
 AGAIN4:
