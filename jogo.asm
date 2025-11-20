@@ -2,7 +2,7 @@ TITLE JOGO
 .MODEL SMALL
 .STACK 100h
 .DATA
-  MSG_BEMVINDO DB 'JOGO DA VELHA$'
+  MSG_BEMVINDO DB 'JOGO DA VELHA $'
   MSG1 DB 'Selecione o modo de jogo (0 - Multiplayer | 1 - Computador)', 13, 10, 13, 10,'Digite a sua opcao: $'
   MSG2 DB 10,10,'Tente novamente, digito nao reconhecido...',13, 13, 10, '$'
   MATRIZ DB 31H, 32H, 33H
@@ -22,10 +22,8 @@ TITLE JOGO
   MSG_VEZ_J1 DB 'Vez do jogador 1 $'
   MSG_VEZ_J2 DB 'Vez do jogador 2 $'
 
-  MSG_GANHOU_J1 DB 'Jogador 1 ganhou $'
-  MSG_GANHOU_J2 DB 'Jogador 2 ganhou $'
-  MSG_VIT_JOG DB 'O jogador 1 eh o vencedor$'
-  MSG_VIT_JOG2_COMP DB 'O jogador 2 eh o vencedor$'
+  MSG_VIT_JOG DB 'O jogador 1 eh o vencedor $'
+  MSG_VIT_JOG2_COMP DB 'O jogador 2 eh o vencedor $'
 .CODE 
 INCLUDE macros.inc
 
