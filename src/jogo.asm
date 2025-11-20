@@ -153,120 +153,120 @@ IMPRIME_MATRIZ ENDP
       RET 
   INICIALIZACAO ENDP
 
-VER_VIT PROC
-;Verificação horizontal
-    XOR BX,BX
-    MOV CL,3
+  VER_VIT PROC
+  ;Verificação horizontal
+      XOR BX,BX
+      MOV CL,3
 
-DENOVO1:
-    XOR DX,DX
-    XOR SI,SI
-    MOV CH,3
+  DENOVO1:
+      XOR DX,DX
+      XOR SI,SI
+      MOV CH,3
 
-AGAIN1:
-    CMP AL,MATRIZ[BX][SI]
-    CMP AL,78h
-    JNE CONT1
-    INC DH
-CONT1:
-    CMP AL,MATRIZ[BX][SI]
-    CMP AL,6Fh
-    JNE SAI1
-    INC DL
-SAI1:
-    INC SI
-    DEC CH
-    JNZ AGAIN1
+  AGAIN1:
+      CMP AL,MATRIZ[BX][SI]
+      CMP AL,78h
+      JNE CONT1
+      INC DH
+  CONT1:
+      CMP AL,MATRIZ[BX][SI]
+      CMP AL,6Fh
+      JNE SAI1
+      INC DL
+  SAI1:
+      INC SI
+      DEC CH
+      JNZ AGAIN1
 
-    CMP DH,3
-    JE CORRECTION1
-    CMP DL,3
-    JE CORRECTION2
-    ADD BX,3
-    DEC CL
-    JNZ DENOVO1
+      CMP DH,3
+      JE CORRECTION1
+      CMP DL,3
+      JE CORRECTION2
+      ADD BX,3
+      DEC CL
+      JNZ DENOVO1
 
-;Verificação vertical
-    XOR SI,SI
-    MOV CL,3
-DENOVO2:
-    XOR DX,DX
-    XOR BX,BX
-    MOV CH,3
-AGAIN2:
-    CMP MATRIZ[BX][SI],78h
-    JNE CONT2
-    INC DH
-CONT2:
-    CMP MATRIZ[BX][SI],6Fh
-    JNE SAI2
-    INC DL
-SAI2:
-    ADD BX,3
-    DEC CH
-    JNZ AGAIN2
+  ;Verificação vertical
+      XOR SI,SI
+      MOV CL,3
+  DENOVO2:
+      XOR DX,DX
+      XOR BX,BX
+      MOV CH,3
+  AGAIN2:
+      CMP MATRIZ[BX][SI],78h
+      JNE CONT2
+      INC DH
+  CONT2:
+      CMP MATRIZ[BX][SI],6Fh
+      JNE SAI2
+      INC DL
+  SAI2:
+      ADD BX,3
+      DEC CH
+      JNZ AGAIN2
 
-    CMP DH,3
-CORRECTION1:
-    JE VIT_JOG
-    CMP DL,3
-CORRECTION2:
-    JE VIT_JOG2_COMP
-    INC SI
-    DEC CL
-    JNZ DENOVO2
-    
-    XOR BX,BX
-    XOR SI,SI
-    XOR DX,DX
-    MOV CX,3
-AGAIN3:
-    CMP MATRIZ[BX][SI],78h
-    JNE CONT3
-    INC DH
-CONT3:
-    CMP MATRIZ[BX][SI],6Fh
-    JNE SAI3
-    INC DL
-SAI3:
-    ADD BX,3
-    INC SI
-    LOOP AGAIN3
-    CMP DH,3
-    JE VIT_JOG
-    CMP DL,3
-    JE VIT_JOG2_COMP
-    XOR BX,BX
-    MOV SI,2
-    MOV CX,3
-AGAIN4:
-    CMP MATRIZ[BX][SI],78h
-    JNE CONT4
-    INC DH
-CONT4:
-    CMP MATRIZ[BX][SI],6Fh
-    JNE SAI4
-    INC DL
-SAI4:
-    ADD BX,3
-    DEC SI
-    LOOP AGAIN4
-    CMP DH,3
-    JE VIT_JOG
-    CMP DL,3
-    JE VIT_JOG2_COMP
-VIT_JOG:
-    MOV AH,9
-    LEA DX,MSG_VIT_JOG
-    INT 21h
-    JMP RETORNA
-VIT_JOG2_COMP:
-    MOV AH,9
-    LEA DX,MSG_VIT_JOG2_COMP
-    INT 21h
-RETORNA:
-    RET
- VER_VIT ENDP
+      CMP DH,3
+  CORRECTION1:
+      JE VIT_JOG
+      CMP DL,3
+  CORRECTION2:
+      JE VIT_JOG2_COMP
+      INC SI
+      DEC CL
+      JNZ DENOVO2
+      
+      XOR BX,BX
+      XOR SI,SI
+      XOR DX,DX
+      MOV CX,3
+  AGAIN3:
+      CMP MATRIZ[BX][SI],78h
+      JNE CONT3
+      INC DH
+  CONT3:
+      CMP MATRIZ[BX][SI],6Fh
+      JNE SAI3
+      INC DL
+  SAI3:
+      ADD BX,3
+      INC SI
+      LOOP AGAIN3
+      CMP DH,3
+      JE VIT_JOG
+      CMP DL,3
+      JE VIT_JOG2_COMP
+      XOR BX,BX
+      MOV SI,2
+      MOV CX,3
+  AGAIN4:
+      CMP MATRIZ[BX][SI],78h
+      JNE CONT4
+      INC DH
+  CONT4:
+      CMP MATRIZ[BX][SI],6Fh
+      JNE SAI4
+      INC DL
+  SAI4:
+      ADD BX,3
+      DEC SI
+      LOOP AGAIN4
+      CMP DH,3
+      JE VIT_JOG
+      CMP DL,3
+      JE VIT_JOG2_COMP
+  VIT_JOG:
+      MOV AH,9
+      LEA DX,MSG_VIT_JOG
+      INT 21h
+      JMP RETORNA
+  VIT_JOG2_COMP:
+      MOV AH,9
+      LEA DX,MSG_VIT_JOG2_COMP
+      INT 21h
+  RETORNA:
+      RET
+  VER_VIT ENDP
 
  MAIN PROC 
     MOV AX,@DATA      ;Inicialização dos dados

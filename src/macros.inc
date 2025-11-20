@@ -24,9 +24,13 @@ POPALL MACRO
   ENDM
 
   CLS MACRO 
+    PUSH AX
+
     MOV AH, 0H
     MOV AL, 03H
     INT 10H
+    
+    POP AX
   ENDM
   
   TEXTO_INICIO MACRO
