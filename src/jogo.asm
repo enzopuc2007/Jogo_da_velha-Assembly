@@ -21,16 +21,24 @@ TITLE JOGO
 
   MSG_VEZ_J1 DB 'Vez do jogador 1 $'
   MSG_VEZ_J2 DB 'Vez do jogador 2 $'
+  MSG_VEZ_ROBO DB 'Vez do robo $'
 
   MSG_VIT_JOG DB 'O jogador 1 eh o vencedor $'
-  MSG_VIT_JOG2_COMP DB 'O jogador 2 eh o vencedor $'
+  MSG_VIT_JOG2 DB 'O jogador 2 eh o vencedor $'
+  MSG_VIT_COMP DB 'O robo eh o vencedor $'
 .CODE 
   INCLUDE macros.inc
  JOGO_MULTIPLAYER PROC
+    TEXTO_INICIO
     PULA_LINHA
     CALL IMPRIME_MATRIZ
   RET
  JOGO_MULTIPLAYER ENDP
+
+ JOGO_ROBO PROC
+  RET
+ JOGO_ROBO ENDP
+
  IMPRIME_MATRIZ PROC
     PUSH CX
     XOR BX,BX
@@ -271,6 +279,7 @@ IMPRIME_MATRIZ ENDP
  MAIN PROC 
     MOV AX,@DATA      ;Inicialização dos dados
     MOV DS,AX
+    XOR DI,DI
 
     CLS
 
@@ -282,7 +291,8 @@ IMPRIME_MATRIZ ENDP
     JZ ESCOPO_ZERO    ;Condição 
 
     ESCOPO_UM:
-      CALL IMPRIME_UM
+      OR DI,1
+      CALL JOGO_ROBO
       JMP FIM_PROGRAMA
 
     ESCOPO_ZERO:   

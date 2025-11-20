@@ -1,7 +1,9 @@
 PULA_LINHA MACRO ; macro de pular linha (será usado repetidas vezes ao longo do jogo)
+    PUSH AX
     MOV AH, 02H
     MOV DL, 10
     INT 21H
+    POP AX
   ENDM
 
 PUSHALL MACRO 
@@ -39,6 +41,37 @@ POPALL MACRO
     MOV AH,9
     LEA DX,MSG_BEMVINDO
     INT 21h
+    POP DX
+    POP AX
+  ENDM
+
+  VEZ_JOG1_IMP MACRO
+    PUSH AX
+    PUSH DX
+
+    MOV AH,9
+    LEA DX,MSG_VEZ_J1
+    INT 21h
+
+    POP DX
+    POP AX
+  ENDM
+
+  VEZ_JOG2_COMP_IMP MACRO
+    PUSH AX
+    PUSH DX
+
+    MOV AH,9
+
+    CMP DI,1
+    JE OUTRA
+    LEA DX,MSG_VEZ_J2
+    INT 21h
+
+OUTRA
+    LEA DX,MSG_VEZ_COMP
+    INT 21h
+
     POP DX
     POP AX
   ENDM
