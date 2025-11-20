@@ -2,7 +2,7 @@ TITLE JOGO
 .MODEL SMALL
 .STACK 100h
 .DATA
-  MSG_BEMVINDO DB 'JOGO DA VELHA', 13, 10, 13, 10, '$'
+  MSG_BEMVINDO DB 'JOGO DA VELHA$'
   MSG1 DB 'Selecione o modo de jogo (0 - Multiplayer | 1 - Computador)', 13, 10, 13, 10,'Digite a sua opcao: $'
   MSG2 DB 10,10,'Tente novamente, digito nao reconhecido...',13, 13, 10, '$'
   MATRIZ DB 31H, 32H, 33H
@@ -24,12 +24,14 @@ TITLE JOGO
 
   MSG_GANHOU_J1 DB 'Jogador 1 ganhou $'
   MSG_GANHOU_J2 DB 'Jogador 2 ganhou $'
-  MSG_VIT_JOG DB 'O jogador 1 é o vencedor$'
-  MSG_VIT_JOG2_COMP DB 'O jogador 2 é o vencedor$'
+  MSG_VIT_JOG DB 'O jogador 1 eh o vencedor$'
+  MSG_VIT_JOG2_COMP DB 'O jogador 2 eh o vencedor$'
 .CODE 
 INCLUDE macros.inc
 
  JOGO_MULTIPLAYER PROC
+  
+  PULA_LINHA
   IMPRIME_MATRIZ
   RET
  JOGO_MULTIPLAYER ENDP
@@ -181,6 +183,7 @@ SAI1:
     INC SI
     DEC CH
     JNZ AGAIN1
+
     CMP DH,3
     JE CORRECTION1
     CMP DL,3
@@ -208,13 +211,17 @@ SAI2:
     ADD BX,3
     DEC CH
     JNZ AGAIN2
+
     CMP DH,3
+CORRECTION2:
     JE VIT_JOG
     CMP DL,3
+CORRECTION2:
     JE VIT_JOG2_COMP
     INC SI
     DEC CL
     JNZ DENOVO2
+    
     XOR BX,BX
     XOR SI,SI
     XOR DX,DX
