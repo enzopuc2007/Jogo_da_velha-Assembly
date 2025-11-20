@@ -114,7 +114,6 @@ INCLUDE macros.inc
     JNZ REPETE2
 
     POP CX
-    POPALL
   RET
 IMPRIME_MATRIZ ENDP
 
