@@ -24,8 +24,15 @@ TITLE JOGO
 
   MSG_GANHOU_J1 DB 'Jogador 1 ganhou $'
   MSG_GANHOU_J2 DB 'Jogador 2 ganhou $'
+  MSG_VIT_JOG DB 'O jogador 1 é o vencedor$'
+  MSG_VIT_JOG2_COMP DB 'O jogador 2 é o vencedor$'
 .CODE 
 INCLUDE macros.inc
+
+ JOGO_MULTIPLAYER PROC
+  IMPRIME_MATRIZ
+  RET
+ JOGO_MULTIPLAYER ENDP
  IMPRIME_MATRIZ PROC
     PUSH CX
 
@@ -150,7 +157,7 @@ IMPRIME_MATRIZ ENDP
       RET 
   INICIALIZACAO ENDP
 
- VER_VIT PROC
+VER_VIT PROC
 ;Verificação horizontal
     XOR BX,BX
     MOV CL,3
@@ -161,23 +168,23 @@ DENOVO1:
     MOV CH,3
 
 AGAIN1:
-    CMP MATRIZ[BX][SI],78h
+    CMP AL,MATRIZ[BX][SI]
+    CMP AL,78h
     JNE CONT1
     INC DH
 CONT1:
-    CMP MATRIZ[BX][SI],6Fh
+    CMP AL,MATRIZ[BX][SI]
+    CMP AL,6Fh
     JNE SAI1
     INC DL
 SAI1:
     INC SI
     DEC CH
     JNZ AGAIN1
-
     CMP DH,3
-    JE VIT_JOG
+    JE CORRECTION1
     CMP DL,3
-    JE VIT_JOG2_COMP
-
+    JE CORRECTION2
     ADD BX,3
     DEC CL
     JNZ DENOVO1
@@ -185,12 +192,10 @@ SAI1:
 ;Verificação vertical
     XOR SI,SI
     MOV CL,3
-
 DENOVO2:
     XOR DX,DX
     XOR BX,BX
     MOV CH,3
-
 AGAIN2:
     CMP MATRIZ[BX][SI],78h
     JNE CONT2
@@ -203,43 +208,38 @@ SAI2:
     ADD BX,3
     DEC CH
     JNZ AGAIN2
-
     CMP DH,3
     JE VIT_JOG
     CMP DL,3
     JE VIT_JOG2_COMP
-
     INC SI
     DEC CL
     JNZ DENOVO2
-
     XOR BX,BX
     XOR SI,SI
     XOR DX,DX
     MOV CX,3
-
 AGAIN3:
     CMP MATRIZ[BX][SI],78h
+CORRECTION1:
     JNE CONT3
     INC DH
 CONT3:
     CMP MATRIZ[BX][SI],6Fh
+CORRECTION2:
     JNE SAI3
     INC DL
 SAI3:
     ADD BX,3
     INC SI
     LOOP AGAIN3
-
     CMP DH,3
     JE VIT_JOG
     CMP DL,3
     JE VIT_JOG2_COMP
-
     XOR BX,BX
     MOV SI,2
     MOV CX,3
-
 AGAIN4:
     CMP MATRIZ[BX][SI],78h
     JNE CONT4
@@ -252,12 +252,10 @@ SAI4:
     ADD BX,3
     DEC SI
     LOOP AGAIN4
-
     CMP DH,3
     JE VIT_JOG
     CMP DL,3
     JE VIT_JOG2_COMP
-
 VIT_JOG:
     MOV AH,9
     LEA DX,MSG_VIT_JOG
@@ -267,7 +265,6 @@ VIT_JOG2_COMP:
     MOV AH,9
     LEA DX,MSG_VIT_JOG2_COMP
     INT 21h
-
 RETORNA:
     RET
  VER_VIT ENDP
