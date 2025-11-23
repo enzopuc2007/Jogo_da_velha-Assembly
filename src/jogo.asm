@@ -1,11 +1,14 @@
-TITLE JOGO
-.MODEL SMALL
-.STACK 100h
-.DATA
-  MSG_BEMVINDO DB 'JOGO DA VELHA $'
-  MSG1 DB 'Selecione o modo de jogo (0 - Multiplayer | 1 - Computador)', 13, 10, 13, 10,'Digite a sua opcao: $'
-  MSG2 DB 10,10,'Tente novamente, digito nao reconhecido...',13, 13, 10, '$'
-  MATRIZ DB 31H, 32H, 33H
+TITLE JOGO_DA_VELHA_OSC
+; Este trabalho foi realizado durante as aulas prática de Organização de Sistemas de Computação
+; pelos alunos de Engenharia de Computação da Pontifícia Universidade Católica de Campinas 
+; Enzo Marchi Romera e Gabriel de Oliveira Baptista
+.MODEL SMALL ; o modelo de código deste programa Assembly x8086 é SMALL
+.STACK 100h ; definição do tamanho da pilha
+.DATA ; início do segmento de dados;
+  MSG_BEMVINDO DB 'JOGO DA VELHA $' ; mensagem de boas-vindas direcionada ao usuário
+  MSG1 DB 'Selecione o modo de jogo (0 - Multiplayer | 1 - Computador)', 13, 10, 13, 10,'Digite a sua opcao: $' ; mensagem de seleção de modo de jogo
+  MSG2 DB 10,10,'Tente novamente, digito nao reconhecido...',13, 13, 10, '$' ; caso o dígito para a entrada do ti de jogo não for conhecida, esta mensagem será exibida
+  MATRIZ DB 31H, 32H, 33H ; declaração inicial da matriz com a numeração das posições dos dígitos.
          DB 34H, 35H, 36H
          DB 37H, 38H, 39H
   MSG_ZERO DB 13, 10, 'A opcao selecionada foi a opcao MULTIPLAYER.', 13, 10, '$'
@@ -624,6 +627,6 @@ JOG_NOV2:
   JMP FIM_PROGRAMA
 FIM_PROGRAMA:
   MOV AH, 4CH     ;Devolve o controle 
-  INT 21H
+  INT 21H         ; Fim do programa
  MAIN ENDP
 END MAIN
